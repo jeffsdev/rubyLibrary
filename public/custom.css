@@ -1,0 +1,21 @@
+body {
+  background-color: #d9e3e1;
+  font-family: 'Goudy Bookletter 1911', serif;
+}
+
+ul {
+  font-size: 18px;
+}
+
+a {
+  font-size: 18px;
+}
+
+.btn {
+  background-color: #e7d4e7;
+  font-size: 16px;
+}
+
+label {
+  font-size: 16px;
+}
