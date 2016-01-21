@@ -1,0 +1,11 @@
+<h1>Book</h1>
+
+<p><%= @book.title() %></p>
+<p>by: <%= @book.author() %></p>
+
+<form action="/catalog/<%= @book.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete book</button>
+</form>
+
+<a href="/catalog/<%= @book.id() %>/edit">Edit Book</a>

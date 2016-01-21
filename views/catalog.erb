@@ -1,0 +1,36 @@
+<h1>Catalog</h1>
+
+<form action="/catalog/search" method="post">
+  <div class="form-group">
+    <label>Search</label>
+    <input type="text" class="form-control" id="search" name="search">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<br>
+<a href="/catalog/book_form">Add a book</a>
+<br>
+
+<div class="book-list">
+
+  <h3>List of books:</h3>
+  <% if @books.any?() %>
+  <ul>
+    <% @books.each() do |book| %>
+      <li><a href="/catalog/<%= book.id() %>"><%= book.author() %> , <%= book.title() %></a></li>
+      <li><%= book.patron_id() %></li>
+      <li><%= book.id() %></li>
+      <br>
+    <% end %>
+  </ul>
+
+  <% else %>
+
+  <p>
+    There are no books available!
+  </p>
+
+  <% end %>
+
+</div>

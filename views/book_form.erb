@@ -1,0 +1,26 @@
+<h1>Add a book to the catalog</h1>
+
+
+<form action="/catalog" method="post">
+  <div class="form-group">
+    <label>Author</label>
+    <input type="text" class="form-control" id="author" name="author" placeholder="Author">
+  </div>
+
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+  </div>
+
+  <div class="form-group">
+    <label></label>
+    <input type="hidden" class="form-control" id="patron_id" name="patron_id">
+  </div>
+
+  <div class="form-group">
+    <label></label>
+    <input type="hidden" class="form-control" id="id" name="id">
+  </div>
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
