@@ -18,8 +18,7 @@
   <% if @books.any?() %>
   <ul>
     <% @books.each() do |book| %>
-      <li><a href="/catalog/<%= book.id() %>"><%= book.author() %> , <%= book.title() %></a></li>
-      <li><%= book.patron_id() %></li>
+      <li><a href="/catalog/<%= book.id() %>"><%= book.author() %> <br> <%= book.title() %></a></li>
       <li><%= book.id() %></li>
       <br>
     <% end %>
@@ -34,3 +33,4 @@
   <% end %>
 
 </div>
+<a href="/">Home</a>

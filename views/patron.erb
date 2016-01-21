@@ -1,16 +1,13 @@
 <h1>Patron page</h1>
 
-<a href="#">Your Checkouts</a>
-
 <a href="/patron/form">Add New Patron</a>
 
-<h3>List of books:</h3>
-<% if @books.any?() %>
+<h3>Patron List:</h3>
+<% if @patrons.any?() %>
 <ul>
-  <% @books.each() do |book| %>
-    <li><a href="/catalog/<%= book.id() %>"><%= book.author() %> , <%= book.title() %></a></li>
-    <li><%= book.patron_id() %></li>
-    <li><%= book.id() %></li>
+  <% @patrons.each() do |patron| %>
+    <li><a href="/patron/<%= patron.id() %>"><%= patron.name() %> <br> <%= patron.phone() %></a></li>
+    <li><%= patron.id() %></li>
     <br>
   <% end %>
 </ul>
@@ -18,7 +15,10 @@
 <% else %>
 
 <p>
-  There are no books available!
+  There are no patrons!
 </p>
 
 <% end %>
+
+</div>
+<a href="/">Home</a>

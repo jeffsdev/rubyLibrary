@@ -1,0 +1,42 @@
+<h1>Patron</h1>
+
+<p><%= @patron.name() %></p>
+<p>phone: <%= @patron.phone() %></p>
+<p>ID: <%= @patron.id() %></p>
+
+<form action="/patron/<%= @patron.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete Patron</button>
+</form>
+
+<div class="book-list">
+
+  <h3>List of books:</h3>
+  <% if @books.any?() %>
+  <form action="/patron/<%= @patron.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @books.each() do |book| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="book_ids[]" value="<%= book.id() %>"><%= book.title() %>
+          </label>
+        </div>
+      <% end %>
+      <button type="submit">Checkout Books</button>
+      </form>
+    <% end %>
+
+    <% if @patron.books().any?() %>
+    <h3>Here are all the books you have checked out:</h3>
+
+    <ul>
+      <% @patron.books().each() do |book| %>
+        <li><%= book.title() %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no books checked out!</p>
+  <% end %>
+<a href="/patron">Back to Patrons</a>
+</div>

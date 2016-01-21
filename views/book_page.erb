@@ -9,3 +9,16 @@
 </form>
 
 <a href="/catalog/<%= @book.id() %>/edit">Edit Book</a>
+
+<% if @book.patrons().any?() %>
+
+  <h3>Here are all the patrons in this book:</h3>
+
+  <ul>
+    <% @book.patrons().each() do |patron| %>
+      <li><%= patron.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no patrons yet! <a href="/patrons">Add patrons here</a></p>
+<% end %>

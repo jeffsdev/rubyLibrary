@@ -21,7 +21,6 @@ class Book
     @id = result.first().fetch("id").to_i()
   end
 
-
   define_method(:delete) do
     DB.exec("DELETE FROM patrons_books WHERE book_id = #{self.id()};")
     DB.exec("DELETE FROM books WHERE id = #{self.id()};")

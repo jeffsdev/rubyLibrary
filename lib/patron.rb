@@ -51,6 +51,16 @@ end
     patron_books
   end
 
+  define_singleton_method(:find) do |id|
+    found_patron = nil
+    Patron.all().each() do |patron|
+      if patron.id().==(id)
+        found_patron = patron
+      end
+    end
+    found_patron
+  end
+
   # define_method(:==) do |another_patron|
   #   self.name().==(another_patron.name()).&(self.id().==(another_patron.id()))
   # end
