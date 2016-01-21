@@ -3,6 +3,10 @@ body {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
+div {
+  font-size: 18px;
+}
+
 ul {
   font-size: 18px;
 }
