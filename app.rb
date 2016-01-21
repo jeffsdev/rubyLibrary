@@ -50,6 +50,21 @@ get('/catalog/:id/edit') do
   erb(:edit_book)
 end
 
+get('/patron') do
+  @patrons = Patron.all()
+  erb(:patron)
+end
+
+get('/patron/form') do
+  @patrons = Patron.all()
+  erb(:patron_form)
+end
+
+post('/patron/form') do
+  @patrons = Patron.all()
+  erb(:patron)
+end
+
 patch("/catalog/:id") do
   title = params.fetch("title")
   author = params.fetch("author")
