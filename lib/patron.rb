@@ -7,16 +7,9 @@ class Patron
     @id = attributes.fetch(:id)
   end
 
-    define_singleton_method(:all) do
+  define_singleton_method(:all) do
     returned_patrons = DB.exec("SELECT * FROM patrons;")
-    patrons = []
-    returned_patrons.each() do |patron|
-      name = patron.fetch("name")
-      phone = patron.fetch("phone")
-      id = patron.fetch("id").to_i()
-      patrons.push(Patron.new({:name => name, :phone => phone, :id => id}))
-    end
-    patrons
+    Patron.map_results_to_objects(returned_patrons)
   end
 
   define_method(:save) do
@@ -24,19 +17,18 @@ class Patron
     @id = result.first().fetch("id").to_i()
   end
 
-  define_method(:update) do |attributes|
-  @name = attributes.fetch(:name, @name)
-  DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{self.id()};")
-
-  attributes.fetch(:book_ids, []).each() do |book_id|
-    DB.exec("INSERT INTO patrons_books (patron_id, book_id) VALUES (#{self.id()}, #{book_id});")
-  end
-end
-
   define_method(:delete) do
-      DB.exec("DELETE FROM patrons_books WHERE patron_id = #{self.id()};")
-      DB.exec("DELETE FROM patrons WHERE id = #{self.id()};")
+    DB.exec("DELETE FROM patrons_books WHERE patron_id = #{self.id()};")
+    DB.exec("DELETE FROM patrons WHERE id = #{self.id()};")
+  end
+
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{self.id()};")
+    attributes.fetch(:book_ids, []).each() do |book_id|
+      DB.exec("INSERT INTO patrons_books (patron_id, book_id) VALUES (#{self.id()}, #{book_id});")
     end
+  end
 
   define_method(:books) do
     patron_books = []
@@ -61,9 +53,16 @@ end
     found_patron
   end
 
-  # define_method(:==) do |another_patron|
-  #   self.name().==(another_patron.name()).&(self.id().==(another_patron.id()))
-  # end
+  def self.map_results_to_objects(returned_patrons)
+    patrons = []
+    returned_patrons.each() do |patron|
+      name = patron.fetch("name")
+      phone = patron.fetch("phone")
+      id = patron.fetch("id").to_i()
+      patrons.push(Patron.new({:name => name, :phone => phone, :id => id}))
+    end
+    patrons
+  end
 
   def ==(another_customer)
     self.name() == another_customer.name() &&
@@ -71,4 +70,4 @@ end
     self.phone().to_i == another_customer.phone().to_i
   end
 
-  end
+end

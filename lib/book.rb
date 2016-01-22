@@ -7,10 +7,6 @@ class Book
     @id = attributes.fetch(:id)
   end
 
-  define_method(:==) do |another_book|
-    self.title().==(another_book.title())
-  end
-
   def self.all
     returned_books = DB.exec("SELECT * FROM books;")
     Book.map_results_to_objects(returned_books)
@@ -30,12 +26,11 @@ class Book
     @author = attributes.fetch(:author, @author)
     @title = attributes.fetch(:title, @title)
     @id = self.id()
-      DB.exec("UPDATE books SET author = '#{@author}', title = '#{@title}' WHERE id = #{@id};")
+    DB.exec("UPDATE books SET author = '#{@author}', title = '#{@title}' WHERE id = #{@id};")
     attributes.fetch(:patron_ids, []).each() do |patron_id|
       DB.exec("INSERT INTO patrons_books (patron_id, book_id) VALUES (#{patron_id}, #{self.id});")
+    end
   end
-end
-
 
   define_method(:patrons) do
     book_patrons = []
@@ -47,9 +42,9 @@ end
       phone = patron.first().fetch("phone")
       id = patron.first().fetch("id")
       book_patrons.push(Patron.new({:name => name, :phone => phone, :id => patron_id}))
+    end
+    book_patrons
   end
-  book_patrons
-end
 
   define_singleton_method(:find) do |id|
     found_book = nil
@@ -67,7 +62,6 @@ end
   end
 
   def self.map_results_to_objects(filtered_books)
-
     books = []
     filtered_books.each() do |book|
       author = book.fetch('author')
@@ -79,4 +73,9 @@ end
     end
     books
   end
+
+  define_method(:==) do |another_book|
+    self.title().==(another_book.title())
+  end
+
 end
