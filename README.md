@@ -3,11 +3,11 @@
 #### By Jeff Seymour, Greg Kanteres
 
 ## Description
-A program to catalog a library's books and let patrons check them out.
+A program to catalog a library's books and let patrons check them out.  
 Exploring object-oriented Ruby and databases.
 
 ## Technologies Used
-HTML, CSS, Ruby, RSpec, Capybara, Sinatra
+HTML, CSS, Ruby, RSpec, Capybara, Sinatra, PostgreSQL
 
 ## Setup
 Clone repository  
